@@ -32,13 +32,19 @@ cd BSA-2025-Checkly-Automation-Test
 npm install
 ```
 
-### 3. Run the tests
+### 3. Install Playwright browsers
+
+```bash
+npx playwright install
+```
+
+### 4. Run the tests
 
 ```bash
 npm test
 ```
 
-### 4. View the report
+### 5. View the report
 
 ```bash
 npm run report
