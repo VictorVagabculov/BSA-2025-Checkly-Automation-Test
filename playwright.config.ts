@@ -17,7 +17,7 @@ export default defineConfig({
 
   use: {
     // TODO: Change this to the staging or production URL when available
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3001/api/v1/',
     trace: 'on-first-retry',
   },
 
