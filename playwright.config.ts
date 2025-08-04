@@ -1,7 +1,4 @@
 import { defineConfig, devices } from '@playwright/test';
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
  * Playwright configuration
@@ -16,8 +13,7 @@ export default defineConfig({
   reporter: [['list'], ['html', { open: 'never' }]],
 
   use: {
-    // TODO: Change this to the staging or production URL when available
-    baseURL: 'http://localhost:3001/api/v1/',
+    baseURL: process.env.BASE_URL || 'http://checkly.eu-north-1.elasticbeanstalk.com/api/v1/',
     trace: 'on-first-retry',
   },
 
