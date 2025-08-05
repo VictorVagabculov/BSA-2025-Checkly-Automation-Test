@@ -1,49 +1,43 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
 
-/**
- * Playwright configuration
- * See https://playwright.dev/docs/test-configuration
- */
+dotenv.config(); // ✅ Load variables from .env.local or .env.production
+
 export default defineConfig({
-  testDir: './tests',
-  fullyParallel: true,
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
-  reporter: [['list'], ['html', { open: 'never' }]],
+    testDir: './tests',
+    fullyParallel: true,
+    forbidOnly: !!process.env.CI,
+    retries: process.env.CI ? 2 : 0,
+    workers: process.env.CI ? 1 : undefined,
 
-  use: {
-    baseURL: process.env.BASE_URL || 'http://checkly.eu-north-1.elasticbeanstalk.com/api/v1/',
-    trace: 'on-first-retry',
-  },
+    // ✅ Reporter config (unchanged)
+    reporter: [['list'], ['html', { open: 'never' }]],
 
-  // The following projects are for running tests in different browsers.
-  // They are not needed for API testing, so they're commented out for now.
-  // You can uncomment them when adding UI tests.
-  /*
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+    // ✅ Common config used across projects
+    use: {
+        trace: 'on-first-retry',
+        screenshot: 'only-on-failure',
+        video: 'retain-on-failure',
     },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-  ],
-  */
 
-  // This starts a local dev server before running UI tests.
-  // Not needed for API testing, so it's commented out for now.
-  /*
-  webServer: {
-    command: 'npm run start',
-    url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
-  },
-  */
+    // ✅ NEW: Define separate projects for UI and API
+    projects: [
+        {
+            name: 'ui',
+            testMatch: /.*ui\.spec\.ts$/, // Runs only *.ui.spec.ts files
+            use: {
+                ...devices['Desktop Chrome'],
+                baseURL: process.env.FRONTEND_URL || 'http://localhost:3000', // frontend base
+            },
+        },
+        {
+            name: 'api',
+            testMatch: /.*api\.spec\.ts$/, // Runs only *.api.spec.ts files
+            use: {
+                baseURL: process.env.API_URL || process.env.BASE_URL || 'http://localhost:3000/api/v1', // fallback for legacy tests
+            },
+        },
+    ],
+
+    // ❌ We are not using `webServer` yet, since frontend is started manually or deployed.
 });

@@ -5,11 +5,12 @@
     "main": "index.js",
     "scripts": {
         "test": "npx playwright test",
-        "test:local": "dotenv -e .env.local -- npx playwright test",
-        "test:production": "dotenv -e .env.production -- npx playwright test",
-        "test:ui": "npx playwright test --ui",
-        "test:ui:local": "dotenv -e .env.local -- npx playwright test --ui",
-        "test:ui:production": "dotenv -e .env.production -- npx playwright test --ui",
+        "test:ui": "dotenv -e .env.local -- npx playwright test --project=ui",
+        "test:api": "dotenv -e .env.local -- npx playwright test --project=api",
+        "test:all:local": "dotenv -e .env.local -- npx playwright test",
+        "test:ui:prod": "dotenv -e .env.production -- npx playwright test --project=ui",
+        "test:api:prod": "dotenv -e .env.production -- npx playwright test --project=api",
+        "test:all:prod": "dotenv -e .env.production -- npx playwright test",
         "report": "npx playwright show-report"
     },
     "repository": {
