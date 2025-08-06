@@ -6,6 +6,7 @@ export class SignInPage {
     readonly passwordInput: Locator;
     readonly submitButton: Locator;
     readonly linkToSignUp: Locator;
+    readonly emailErrorMessage: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -13,6 +14,7 @@ export class SignInPage {
         this.passwordInput = page.getByPlaceholder('Enter your password');
         this.submitButton = page.getByRole('button', { name: /sign in/i });
         this.linkToSignUp = page.getByRole('link', { name: /create an account/i });
+        this.emailErrorMessage = page.getByText(/invalid email format/i);
     }
 
     async goto() {
