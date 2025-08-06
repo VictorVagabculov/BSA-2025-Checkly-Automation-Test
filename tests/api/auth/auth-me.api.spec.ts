@@ -1,6 +1,11 @@
-import { test } from './fixtures/base-fixtures';
-import { expectSuccessfulRegistration, expectSuccessfulAuthMe, expectAuthMeError } from './helpers/auth-test-helpers';
-import { generateUser } from '../helpers/generators';
+import { test } from '@tests/api/fixtures/base-fixtures';
+
+import {
+    expectSuccessfulAuthMe,
+    expectAuthMeError,
+    expectSuccessfulRegistration,
+} from '@tests/api/helpers/auth-test-helpers';
+import { generateUser } from '@helpers/generators';
 
 const user = {
     id: 0,

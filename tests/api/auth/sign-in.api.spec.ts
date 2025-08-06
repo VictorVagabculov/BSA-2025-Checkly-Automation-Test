@@ -1,7 +1,11 @@
-import { test } from './fixtures/base-fixtures';
-import { expectSuccessfulRegistration, expectSuccessfulLogin, expectLoginError } from './helpers/auth-test-helpers';
+import { test } from '@tests/api/fixtures/base-fixtures';
+import {
+    expectSuccessfulRegistration,
+    expectSuccessfulLogin,
+    expectLoginError,
+} from '@tests/api/helpers/auth-test-helpers';
 import { faker } from '@faker-js/faker';
-import { generateUser } from '../helpers/generators';
+import { generateUser } from '@helpers/generators';
 
 const user = {
     name: '',

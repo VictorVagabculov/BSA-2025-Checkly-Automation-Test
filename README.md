@@ -1,8 +1,9 @@
+
 # BSA 2025 – Checkly Automation Test
 
 Automated API and UI tests for the Checkly project, developed as part of the Binary Studio Academy 2025 program.
 
-This project uses [Playwright](https://playwright.dev/) to test the functionality of the Checkly backend (and UI in the future).  
+This project uses [Playwright](https://playwright.dev/) to test both backend and frontend functionality of Checkly.  
 Includes Continuous Integration via GitHub Actions and generates HTML test reports as build artifacts.
 
 ---
@@ -12,7 +13,8 @@ Includes Continuous Integration via GitHub Actions and generates HTML test repor
 - [Playwright](https://playwright.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Faker](https://www.npmjs.com/package/@faker-js/faker) – fake test data
-- [Ajv](https://ajv.js.org/) – schema validation (optional)
+- [Ajv](https://ajv.js.org/) – schema validation
+- [dotenv](https://www.npmjs.com/package/dotenv) – environment configuration
 - GitHub Actions – CI/CD pipeline
 
 ---
@@ -38,13 +40,45 @@ npm install
 npx playwright install
 ```
 
-### 4. Run the tests
+### 4. Create a `.env` file (or `.env.local`)
+
+```env
+API_URL=http://localhost:3001/api/v1/
+FRONTEND_URL=http://localhost:3000/
+```
+
+> ⚠️ **Important**: Make sure your URLs end with a `/`.
+
+---
+
+## 🧪 Running the Tests
+
+### Run all tests
 
 ```bash
 npm test
 ```
 
-### 5. View the report
+### Run only API tests
+
+```bash
+npx playwright test --project=api
+```
+
+### Run only UI tests
+
+```bash
+npx playwright test --project=ui
+```
+
+### Run a specific test file
+
+```bash
+npx playwright test tests/api/auth/sign-in.api.spec.ts --project=api
+npx playwright test tests/ui/auth/sign-in.ui.spec.ts --project=ui
+```
+
+### View the HTML report
 
 ```bash
 npm run report
@@ -53,40 +87,52 @@ npm run report
 
 ---
 
-## 🧪 Continuous Integration
-
-On every push or pull request to `main` or `master`, the following happens:
-
-- Dependencies are installed
-- Playwright tests are executed
-- The HTML report is uploaded as an artifact
-
-🔍 You can download the report from:  
-**Actions tab → Latest workflow run → Artifacts → `playwright-report` → Download → open `index.html`**
-
----
-
-## 📁 Project Structure (simplified)
+## 🧠 Folder Structure
 
 ```
 .
-├── tests/                # API and UI test suites
-├── utils/                # Helpers, data generators, etc.
-├── controllers/          # API controllers (optional)
-├── .github/workflows/    # CI configuration (playwright.yml)
-├── playwright.config.ts  # Playwright test config
-├── .prettierrc           # Code formatting rules
+├── api/
+│   ├── controllers/          # API controllers
+│   ├── helpers/              # Data generators, schema validator, etc.
+│   └── schemas/              # OpenAPI schemas
+│
+├── tests/
+│   ├── api/                  # API tests
+│   │   └── authentication/
+│   │   └── helpers/
+│   └── ui/                   # UI tests
+│       └── auth/
+│
+├── ui/
+│   ├── controllers/          # UI Page Objects
+│   └── utils/                # UI helpers (coming soon)
+│
+├── .env                      # Environment variables
+├── playwright.config.ts      # Playwright test config
+├── tsconfig.json
 └── package.json
 ```
 
 ---
 
+## ✨ Features
+
+- ✅ Fully separated UI and API test projects
+- ✅ Type-safe test data using Faker
+- ✅ Schema validation with Ajv
+- ✅ Page Object Model for UI interactions
+- ✅ Custom helper methods for repeated logic
+- ✅ Multi-environment setup via `.env` files
+
+---
+
 ## ✅ TODO
 
-- [ ] Add actual API test cases (auth, users, books, etc.)
-- [ ] Setup test data fixtures
-- [ ] Add shared steps for auth and user flows
-- [ ] Prepare UI tests (optional)
+- [x] Add API test cases (auth, users)
+- [x] Setup schema validation
+- [x] Add shared helper methods
+- [x] UI test page object abstraction
+- [ ] Finalize CI configuration with production deployment
 
 ---
 
