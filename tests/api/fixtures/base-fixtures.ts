@@ -1,5 +1,5 @@
 import { test as baseTest } from '@playwright/test';
-import { ApiControllers } from '../../api/controllers/api-controllers';
+import { ApiControllers } from '@api/controllers/api-controllers';
 
 export const test = baseTest.extend<{
     api: ApiControllers;

@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "CommonJS",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
+        "paths": {
+            "@api/*": ["api/*"],
+            "@schemas/*": ["api/schemas/*"],
+            "@helpers/*": ["helpers/*"],
+            "@test-helpers-api/*": ["tests/api/helpers/*"],
+            "@test-fixtures-api/*": ["tests/api/fixtures/*"],
+            "@tests/*": ["tests/*"],
+            "@ui/controllers/*": ["tests/ui/controllers/*"],
+            "@ui/*": ["tests/ui/*"]
+        },
+        "types": ["@playwright/test", "node"]
+    },
+    "include": ["tests", "api", "ui"]
+}

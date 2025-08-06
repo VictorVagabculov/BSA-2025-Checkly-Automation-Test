@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 
-dotenv.config(); // ✅ Load variables from .env.local or .env.production
+dotenv.config();
 
 export default defineConfig({
     testDir: './tests',
@@ -13,7 +13,6 @@ export default defineConfig({
     // ✅ Reporter config (unchanged)
     reporter: [['list'], ['html', { open: 'never' }]],
 
-    // ✅ Common config used across projects
     use: {
         trace: 'on-first-retry',
         screenshot: 'only-on-failure',
@@ -23,18 +22,18 @@ export default defineConfig({
     // ✅ NEW: Define separate projects for UI and API
     projects: [
         {
+            name: 'api',
+            testMatch: /.*api\.spec\.ts$/, // Runs only *.api.spec.ts files
+            use: {
+                baseURL: process.env.API_URL || process.env.BASE_URL || 'http://localhost:3001/api/v1/',
+            },
+        },
+        {
             name: 'ui',
             testMatch: /.*ui\.spec\.ts$/, // Runs only *.ui.spec.ts files
             use: {
                 ...devices['Desktop Chrome'],
-                baseURL: process.env.FRONTEND_URL || 'http://localhost:3000', // frontend base
-            },
-        },
-        {
-            name: 'api',
-            testMatch: /.*api\.spec\.ts$/, // Runs only *.api.spec.ts files
-            use: {
-                baseURL: process.env.API_URL || process.env.BASE_URL || 'http://localhost:3000/api/v1', // fallback for legacy tests
+                baseURL: process.env.FRONTEND_URL || 'http://localhost:3000/', // frontend base
             },
         },
     ],

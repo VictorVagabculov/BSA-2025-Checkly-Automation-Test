@@ -1,8 +1,9 @@
 import { expect } from '@playwright/test';
-import { ApiControllers } from '../../api/controllers/api-controllers';
-import { registerResponseSchema, loginResponseSchema, authMeSchema } from '../../api/schemas/auth-schemas';
-import { errorSchema } from '../../api/schemas/error-schemas';
-import { expectToMatchSchema } from '../../helpers/schema-validator';
+
+import { ApiControllers } from '@api/controllers/api-controllers';
+import { registerResponseSchema, loginResponseSchema, authMeSchema } from '@schemas/auth-schemas';
+import { errorSchema } from '@schemas/error-schemas';
+import { expectToMatchSchema } from '@helpers/schema-validator';
 
 export async function expectSuccessfulRegistration(api: ApiControllers, email: string, name: string, password: string) {
     const response = await api.auth.register(email, name, password);
