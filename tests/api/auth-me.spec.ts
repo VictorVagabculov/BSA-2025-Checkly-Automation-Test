@@ -1,5 +1,5 @@
-import { test } from './fixtures/base-fixtures';
-import { expectSuccessfulRegistration, expectSuccessfulAuthMe, expectAuthMeError } from './helpers/auth-test-helpers';
+import { test } from '../fixtures/base-fixtures';
+import { expectSuccessfulRegistration, expectSuccessfulAuthMe, expectAuthMeError } from '../helpers/auth-test-helpers';
 import { generateUser } from '../helpers/generators';
 
 const user = {
