@@ -1,10 +1,12 @@
 import { APIRequestContext, APIResponse } from '@playwright/test';
 
+const BASE_URL = process.env.BASE_URL || '';
+
 export class AuthController {
     constructor(private requestContext: APIRequestContext) {}
 
     async login(email: string, password: string): Promise<APIResponse> {
-        const response = await this.requestContext.post('auth/login', {
+        const response = await this.requestContext.post(`${BASE_URL}auth/login`, {
             data: {
                 email,
                 password,
@@ -15,7 +17,7 @@ export class AuthController {
     }
 
     async register(email: string, name: string, password: string): Promise<APIResponse> {
-        const response = await this.requestContext.post('auth/register', {
+        const response = await this.requestContext.post(`${BASE_URL}auth/register`, {
             data: {
                 email,
                 name,
@@ -27,7 +29,7 @@ export class AuthController {
     }
 
     async authMe(token: string): Promise<APIResponse> {
-        const response = await this.requestContext.get('auth/me', {
+        const response = await this.requestContext.get(`${BASE_URL}auth/me`, {
             headers: token
                 ? {
                       Authorization: `Bearer ${token}`,
