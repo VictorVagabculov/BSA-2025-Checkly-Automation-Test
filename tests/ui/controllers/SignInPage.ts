@@ -19,6 +19,10 @@ export class SignInPage {
         await this.page.goto('/sign-in');
     }
 
+    get errorMessage() {
+        return this.page.getByText(/user not found/i);
+    }
+
     async fillForm(email: string, password: string) {
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);

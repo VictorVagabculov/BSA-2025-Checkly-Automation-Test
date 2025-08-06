@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { SignInPage } from '@ui/controllers/SignInPage';
 
-test.describe('[Sign In - UI] Form validation blocks submission when required fields are empty', () => {
+test.describe('[Sign In - UI] Form validation highlights required fields', () => {
     let signInPage: SignInPage;
 
     test.beforeEach(async ({ page }) => {
@@ -9,20 +9,32 @@ test.describe('[Sign In - UI] Form validation blocks submission when required fi
         await signInPage.goto();
     });
 
-    test('Should prevent submission if both fields are empty', async () => {
+    test('Should mark both email and password as invalid when both are empty', async () => {
         await signInPage.submit();
-        await expect(signInPage.emailInput).toBeVisible(); // still on the same page
+
+        const invalidInputs = signInPage.page.locator('input:invalid');
+        await expect(invalidInputs).toHaveCount(2);
+
+        const names = await invalidInputs.evaluateAll((elements) => elements.map((el) => el.getAttribute('name')));
+        expect(names).toContain('email');
+        expect(names).toContain('password');
     });
 
-    test('Should prevent submission if email is empty', async () => {
+    test('Should mark email as invalid when only password is filled', async () => {
         await signInPage.passwordInput.fill('Password123');
         await signInPage.submit();
-        await expect(signInPage.emailInput).toBeVisible(); // still on the same page
+
+        const invalidInputs = signInPage.page.locator('input:invalid');
+        await expect(invalidInputs).toHaveCount(1);
+        await expect(invalidInputs.first()).toHaveAttribute('name', 'email');
     });
 
-    test('Should prevent submission if password is empty', async () => {
+    test('Should mark password as invalid when only email is filled', async () => {
         await signInPage.emailInput.fill('user@example.com');
         await signInPage.submit();
-        await expect(signInPage.passwordInput).toBeVisible(); // still on the same page
+
+        const invalidInputs = signInPage.page.locator('input:invalid');
+        await expect(invalidInputs).toHaveCount(1);
+        await expect(invalidInputs.first()).toHaveAttribute('name', 'password');
     });
 });
