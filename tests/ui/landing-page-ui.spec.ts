@@ -1,9 +1,9 @@
-import { test, expect } from './fixtures/base-fixtures';
+import { test, expect } from '../fixtures/base-fixtures';
 
-test.describe.skip("Landing Page", () => {
+test.describe("Landing Page", () => {
 
   test.beforeEach("Navigate to the landing page", async ({ page }) => {
-    await page.goto("http://checkly.eu-north-1.elasticbeanstalk.com/");
+    await page.goto('/');
   });
 
   test("Has title Checkly", async ({ page }) => {

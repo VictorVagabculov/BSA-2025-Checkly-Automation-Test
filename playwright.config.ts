@@ -12,10 +12,24 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [['list'], ['html', { open: 'never' }]],
 
-  use: {
-    baseURL: process.env.BASE_URL || 'http://checkly.eu-north-1.elasticbeanstalk.com/api/v1/',
-    trace: 'on-first-retry',
-  },
+  projects: [
+    {
+      name: 'api',
+      testMatch: ['tests/api/**/*.spec.ts'],
+      use: {
+        baseURL: process.env.BASE_URL || 'http://checkly.eu-north-1.elasticbeanstalk.com/api/v1/',
+      },
+    },
+    {
+      name: 'ui',
+      testMatch: ['tests/ui/**/*.spec.ts'],
+      use: {
+        baseURL: process.env.UI_BASE_URL || 'http://checkly.eu-north-1.elasticbeanstalk.com',
+        trace: 'on-first-retry',
+        // ...devices['Desktop Chrome'], 
+      },
+    },
+  ],
 
   // The following projects are for running tests in different browsers.
   // They are not needed for API testing, so they're commented out for now.

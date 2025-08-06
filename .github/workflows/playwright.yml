@@ -31,3 +31,6 @@ jobs:
                   echo "✅ Test execution completed."
                   echo "➡️ Download the HTML report from the 'Artifacts' section above."
                   echo "📂 Unzip it and open 'index.html' in your browser to view the results."
+env:
+  BASE_URL: http://checkly.eu-north-1.elasticbeanstalk.com/api/v1
+  UI_BASE_URL: http://checkly.eu-north-1.elasticbeanstalk.com
