@@ -3,7 +3,7 @@ import { test, expect } from './fixtures/base-fixtures';
 test.describe("Landing Page", () => {
 
   test.beforeEach("Navigate to the landing page", async ({ page }) => {
-    await page.goto(`${process.env.UI_BASE_URL}`);
+    await page.goto("/");
   });
 
   test("Has title Checkly", async ({ page }) => {

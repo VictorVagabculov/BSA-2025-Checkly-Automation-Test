@@ -13,7 +13,7 @@ export default defineConfig({
   reporter: [['list'], ['html', { open: 'never' }]],
 
   use: {
-    baseURL: process.env.BASE_URL || 'http://checkly.eu-north-1.elasticbeanstalk.com/api/v1/',
+    baseURL: process.env.BASE_URL || 'http://checkly.eu-north-1.elasticbeanstalk.com/',
     trace: 'on-first-retry',
   },
 
