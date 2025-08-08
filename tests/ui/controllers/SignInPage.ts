@@ -22,7 +22,7 @@ export class SignInPage {
     }
 
     get errorMessage() {
-        return this.page.getByText(/user not found/i);
+        return this.page.getByText(/invalid credentials/i);
     }
 
     async fillForm(email: string, password: string) {
