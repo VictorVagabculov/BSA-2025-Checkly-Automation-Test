@@ -1,4 +1,3 @@
-
 # BSA 2025 – Checkly Automation Test
 
 Automated API and UI tests for the Checkly project, developed as part of the Binary Studio Academy 2025 program.
@@ -132,7 +131,7 @@ npm run report
 - [x] Setup schema validation
 - [x] Add shared helper methods
 - [x] UI test page object abstraction
-- [ ] Finalize CI configuration with production deployment
+- [x] Finalize CI configuration with production deployment
 
 ---
 
