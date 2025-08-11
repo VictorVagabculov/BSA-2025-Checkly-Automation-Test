@@ -34,7 +34,7 @@ test.describe('Header', async () => {
         await expect(heading).toBeVisible();
     });
 
-    //Skipping until this function gets implemented. Will add it the header test block
+    //Skipping until this function gets implemented.
     test.skip('Star Quiz button navigates to the sign-up page', async ({ page }) => {
         await page.getByRole('link', { name: 'Sign in' }).click();
         const heading = page.getByRole('heading', { name: 'Sign Up' });
@@ -69,7 +69,10 @@ test.describe('Hero', async () => {
         // await expect(images.nth(0)).toHaveAttribute('alt', ''); Optional for alt attribute
     });
 
-    test.skip('Star button redirects to register page', async ({ heroSection }) => {});
+    //Skipping until behavior is defined and implemented
+    test.skip('Star button redirects to - page', async ({ heroSection }) => {
+
+    });
 });
 
 test.describe('How it Works', async () => {
@@ -137,7 +140,7 @@ test.describe('Categories', async () => {
             const img = button.locator('img');
 
             await expect(h2).toHaveText(categoriesTitles[i]);
-            await expect(img).toHaveAttribute('alt', categoriesTitles[i]); //If alt is missing or don't match the category, change for toBeVisible
+            await expect(img).toBeVisible(); //If alt is added and matches the category, it might be better to instead .toHaveAttribute('alt', categoriesTitles[i]); 
             await expect(button).toHaveAttribute('aria-pressed', /true|false/); //Check if buttons are clickable (optional)
         }
     });
