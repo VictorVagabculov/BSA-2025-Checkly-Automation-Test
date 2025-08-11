@@ -1,6 +1,5 @@
 import { test } from '@ui/controllers/landing-navigation';
 import { expect } from '@playwright/test';
-import { FoodModule } from '@faker-js/faker/.';
 
 test.describe('Page Title', async () => {
     test('Landing page has Checkly Title', async ({ page }) => {
