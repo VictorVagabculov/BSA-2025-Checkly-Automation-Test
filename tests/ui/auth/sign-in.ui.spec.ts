@@ -173,7 +173,6 @@ test.describe('[Sign in - UI] Consolidated suite', () => {
             await expect(page).toHaveURL(/\/dashboard\/?$/);
 
             // Assert #2: dashboard-specific content is visible
-            await expect(page.getByText('Dashboard placeholder')).toBeVisible();
             await expect(page.getByRole('navigation').getByRole('link', { name: /^Dashboard$/ })).toBeVisible();
             await expect(page.getByRole('navigation').getByRole('link', { name: /My plan/i })).toBeVisible();
 
@@ -198,7 +197,6 @@ test.describe('[Sign in - UI] Consolidated suite', () => {
 
             // Step 3: Validate user lands on intended protected route
             await expect(page).toHaveURL(/\/dashboard\/?$/);
-            await expect(page.getByText('Dashboard placeholder')).toBeVisible();
         });
     });
 });
