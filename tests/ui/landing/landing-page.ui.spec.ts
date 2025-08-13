@@ -1,4 +1,4 @@
-import { test } from '@ui/controllers/landing-navigation';
+import { test } from '@ui/fixtures/landing-fixture';
 import { expect } from '@playwright/test';
 
 test.describe('Page Title', async () => {
@@ -70,9 +70,7 @@ test.describe('Hero', async () => {
     });
 
     //Skipping until behavior is defined and implemented
-    test.skip('Star button redirects to - page', async ({ heroSection }) => {
-
-    });
+    test.skip('Star button redirects to - page', async ({ heroSection }) => {});
 });
 
 test.describe('How it Works', async () => {
@@ -140,7 +138,7 @@ test.describe('Categories', async () => {
             const img = button.locator('img');
 
             await expect(h2).toHaveText(categoriesTitles[i]);
-            await expect(img).toBeVisible(); //If alt is added and matches the category, it might be better to instead .toHaveAttribute('alt', categoriesTitles[i]); 
+            await expect(img).toBeVisible(); //If alt is added and matches the category, it might be better to instead .toHaveAttribute('alt', categoriesTitles[i]);
             await expect(button).toHaveAttribute('aria-pressed', /true|false/); //Check if buttons are clickable (optional)
         }
     });
